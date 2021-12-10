@@ -1,0 +1,925 @@
+;RX Family C/C++ Compiler (V3.01.00 [28 Nov 2018])  09-Dec-2021 20:11:45
+
+;*** CPU TYPE ***
+
+;-ISA=RXV1
+
+;*** COMMAND PARAMETER ***
+
+;-output=src=HM_StarterKit.src
+;-isa=rxv1
+;-fpu
+;-lang=c99
+;-include=.
+;-obj_path=DefaultBuild
+;-asm_path=DefaultBuild
+;-debug
+;-optimize=0
+;-nologo
+;-exec_time=C:\Users\junmo\AppData\Local\Temp\CSPlusBuildTool_67a4aa581fa74aeba628bc162d704dc5itxvyh4h.p1j
+;HM_StarterKit.c
+
+		.glb	_sen_r
+		.glb	_sen_l
+		.glb	_sen_fr
+		.glb	_sen_fl
+		.glb	_mypos
+		.glb	_speed_r
+		.glb	_speed_l
+		.glb	_speed
+		.glb	_timer
+		.glb	_degree
+		.glb	_log_timer
+		.glb	_log_flag
+		.glb	_I_tar_speed
+		.glb	_I_speed
+		.glb	_I_tar_ang_vel
+		.glb	_I_ang_vel
+		.glb	_push_switch
+		.glb	_main
+		.glb	_init_all
+		.glb	_BEEP
+		.glb	_gyro_get_ref
+		.glb	_search_adachi
+		.glb	_front_adjust
+		.glb	_turn
+		.glb	_map_write
+		.glb	_wait_ms
+		.glb	_map_copy
+		.glb	_fast_run
+		.glb	_adjust
+		.glb	_LED
+		.glb	_IOex_SWITCH
+		.SECTION	P,CODE
+_main:
+		.STACK	_main=16
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",43
+		SUB #0CH, R0
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",46
+		BSR _init_all
+L11:	; entry.split
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",47
+		MOV.L #00000000H, 08H[R0]
+L12:	; entry.split1
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",52
+		BSR _BEEP
+L13:	; entry.split2
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",54
+		MOV.L #_speed_r, R14
+		MOV.L #00000000H, [R14]
+L14:	; entry.split3
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",55
+		MOV.L #_speed_l, R14
+		MOV.L #00000000H, [R14]
+L15:	; entry.split4
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",58
+		MOV.L #_log_flag, R14
+		MOV.L #00000000H, [R14]
+L16:	; entry.split5
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",59
+		MOV.W #0001H, 06H[R0]
+		BRA L171
+L17:	; switch_clause_bb
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",78
+		MOV.L #_sen_fr, R14
+		MOV.W [R14], R14
+		MOV.L #_sen_fl, R15
+		ADD [R15].W, R14
+		MOV.L #_sen_r, R15
+		ADD [R15].W, R14
+		MOV.L #_sen_l, R15
+		ADD [R15].W, R14
+		CMP #1F41H, R14
+		BLT L152
+L18:	; if_then_bb
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",79
+		BSR _BEEP
+L19:	; if_then_bb.split
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",80
+		MOV.L #_degree, R14
+		MOV.L #00000000H, [R14]
+L20:	; if_then_bb.split6
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",81
+		MOV.L #_timer, R14
+		MOV.L #00000000H, [R14]
+L21:	; if_then_bb.split7
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",82
+		MOV.L #_log_timer, R14
+		MOV.L #00000000H, [R14]
+L22:	; if_then_bb.split8
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",83
+		BSR _gyro_get_ref
+L23:	; if_then_bb.split9
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",84
+		BSR _BEEP
+L24:	; if_then_bb.split10
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",85
+		MOV.L #_mypos, R1
+		MOV.W #0000H, 02H[R1]
+		MOV.W #0000H, [R1]
+L25:	; if_then_bb.split11
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",86
+		MOV.L #_mypos, R1
+		MOV.L #00000000H, 04H[R1]
+L26:	; if_then_bb.split12
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",87
+		MOV.L #_log_flag, R14
+		MOV.L #00000001H, [R14]
+L27:	; if_then_bb.split13
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",88
+		MOV.L #_log_timer, R14
+		MOV.L #00000000H, [R14]
+L28:	; if_then_bb.split14
+		MOV.L #00000003H, R1
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",89
+		MOV.L R1, R2
+		BSR _search_adachi
+L29:	; if_then_bb.split15
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",90
+		MOV.L #_sen_fr, R1
+		MOV.L 10H[R1], R1
+		CMP #01H, R1
+		BNE L32
+L30:	; bb21
+		MOV.L #_sen_fl, R1
+		MOV.L 10H[R1], R1
+		CMP #01H, R1
+		BNE L32
+L31:	; bb25
+		MOV.L #00000001H, [R0]
+		BRA L33
+L32:	; bb26
+		MOV.L #00000000H, [R0]
+L33:	; bb27
+		MOV.L [R0], R1
+		CMP #00H, R1
+		BEQ L44
+L34:	; if_then_bb32
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",91
+		BSR _front_adjust
+L35:	; if_then_bb32.split
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",92
+		MOV.L #_sen_r, R1
+		MOV.L 10H[R1], R1
+		CMP #01H, R1
+		BNE L39
+L36:	; if_then_bb37
+		MOV.L #00000000H, R4
+		MOV.L #40490FDBH, R3
+		MOV.L #40C90FDBH, R2
+		MOV.L #0000005AH, R1
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",93
+		BSR _turn
+L37:	; if_then_bb37.split
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",94
+		BSR _front_adjust
+L38:	; if_then_bb37.split16
+		MOV.L #00000000H, R4
+		MOV.L #40490FDBH, R3
+		MOV.L #40C90FDBH, R2
+		MOV.L #0000005AH, R1
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",95
+		BSR _turn
+		BRA L45
+L39:	; if_else_bb
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",96
+		MOV.L #_sen_l, R1
+		MOV.L 10H[R1], R1
+		CMP #01H, R1
+		BNE L43
+L40:	; if_then_bb42
+		MOV.L #00000001H, R4
+		MOV.L #40490FDBH, R3
+		MOV.L #40C90FDBH, R2
+		MOV.L #0000005AH, R1
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",97
+		BSR _turn
+L41:	; if_then_bb42.split
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",98
+		BSR _front_adjust
+L42:	; if_then_bb42.split17
+		MOV.L #00000001H, R4
+		MOV.L #40490FDBH, R3
+		MOV.L #40C90FDBH, R2
+		MOV.L #0000005AH, R1
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",99
+		BSR _turn
+		BRA L45
+L43:	; if_else_bb43
+		MOV.L #00000000H, R4
+		MOV.L #40490FDBH, R3
+		MOV.L #40C90FDBH, R2
+		MOV.L #000000B4H, R1
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",101
+		BSR _turn
+		BRA L45
+L44:	; if_else_bb45
+		MOV.L #00000000H, R4
+		MOV.L #40490FDBH, R3
+		MOV.L #40C90FDBH, R2
+		MOV.L #000000B4H, R1
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",104
+		BSR _turn
+L45:	; if_break_bb46
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",106
+		MOV.L #_mypos, R1
+		MOV.L 04H[R1], R2
+		ADD #06H, R2
+		MOV.L R2, R14
+		DIV #04H, R14
+		SHLL #02H, R14
+		SUB R14, R2
+		MOV.L R2, 04H[R1]
+L46:	; if_break_bb46.split
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",107
+		BSR _map_write
+L47:	; if_break_bb46.split18
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",108
+		BSR _BEEP
+L48:	; if_break_bb46.split19
+		MOV.L #00000064H, R1
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",109
+		BSR _wait_ms
+L49:	; if_break_bb46.split20
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",110
+		BSR _BEEP
+L50:	; if_break_bb46.split21
+		MOV.L #00000064H, R1
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",111
+		BSR _wait_ms
+L51:	; if_break_bb46.split22
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",112
+		BSR _BEEP
+L52:	; if_break_bb46.split23
+		MOV.L #00000000H, R1
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",113
+		MOV.L R1, R2
+		BSR _search_adachi
+L53:	; if_break_bb46.split24
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",114
+		MOV.L #_sen_fr, R1
+		MOV.L 10H[R1], R1
+		CMP #01H, R1
+		BNE L56
+L54:	; bb53
+		MOV.L #_sen_fl, R1
+		MOV.L 10H[R1], R1
+		CMP #01H, R1
+		BNE L56
+L55:	; bb57
+		MOV.L #00000001H, [R0]
+		BRA L57
+L56:	; bb58
+		MOV.L #00000000H, [R0]
+L57:	; bb59
+		MOV.L [R0], R1
+		CMP #00H, R1
+		BEQ L68
+L58:	; if_then_bb64
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",115
+		BSR _front_adjust
+L59:	; if_then_bb64.split
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",116
+		MOV.L #_sen_r, R1
+		MOV.L 10H[R1], R1
+		CMP #01H, R1
+		BNE L63
+L60:	; if_then_bb70
+		MOV.L #00000000H, R4
+		MOV.L #40490FDBH, R3
+		MOV.L #40C90FDBH, R2
+		MOV.L #0000005AH, R1
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",117
+		BSR _turn
+L61:	; if_then_bb70.split
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",118
+		BSR _front_adjust
+L62:	; if_then_bb70.split25
+		MOV.L #00000000H, R4
+		MOV.L #40490FDBH, R3
+		MOV.L #40C90FDBH, R2
+		MOV.L #0000005AH, R1
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",119
+		BSR _turn
+		BRA L69
+L63:	; if_else_bb71
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",120
+		MOV.L #_sen_l, R1
+		MOV.L 10H[R1], R1
+		CMP #01H, R1
+		BNE L67
+L64:	; if_then_bb76
+		MOV.L #00000001H, R4
+		MOV.L #40490FDBH, R3
+		MOV.L #40C90FDBH, R2
+		MOV.L #0000005AH, R1
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",121
+		BSR _turn
+L65:	; if_then_bb76.split
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",122
+		BSR _front_adjust
+L66:	; if_then_bb76.split26
+		MOV.L #00000001H, R4
+		MOV.L #40490FDBH, R3
+		MOV.L #40C90FDBH, R2
+		MOV.L #0000005AH, R1
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",123
+		BSR _turn
+		BRA L69
+L67:	; if_else_bb77
+		MOV.L #00000000H, R4
+		MOV.L #40490FDBH, R3
+		MOV.L #40C90FDBH, R2
+		MOV.L #000000B4H, R1
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",125
+		BSR _turn
+		BRA L69
+L68:	; if_else_bb80
+		MOV.L #00000000H, R4
+		MOV.L #40490FDBH, R3
+		MOV.L #40C90FDBH, R2
+		MOV.L #000000B4H, R1
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",128
+		BSR _turn
+L69:	; if_break_bb81
+		MOV.L #0008C02CH, R14
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",130
+		BCLR #06H, [R14].B
+L70:	; if_break_bb81.split
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",131
+		BSR _map_write
+L71:	; if_break_bb81.split27
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",132
+		MOV.L #_log_flag, R14
+		MOV.L #00000000H, [R14]
+L72:	; if_break_bb81.split28
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",133
+		BSR _BEEP
+		BRA L152
+L73:	; switch_clause_bb83
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",148
+		MOV.L #_sen_fr, R14
+		MOV.W [R14], R14
+		MOV.L #_sen_fl, R15
+		ADD [R15].W, R14
+		MOV.L #_sen_r, R15
+		ADD [R15].W, R14
+		MOV.L #_sen_l, R15
+		ADD [R15].W, R14
+		CMP #1F41H, R14
+		BLT L152
+L74:	; if_then_bb98
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",149
+		BSR _BEEP
+L75:	; if_then_bb98.split
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",150
+		BSR _map_copy
+L76:	; if_then_bb98.split29
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",151
+		MOV.L #_degree, R14
+		MOV.L #00000000H, [R14]
+L77:	; if_then_bb98.split30
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",152
+		MOV.L #_timer, R14
+		MOV.L #00000000H, [R14]
+L78:	; if_then_bb98.split31
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",153
+		BSR _gyro_get_ref
+L79:	; if_then_bb98.split32
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",154
+		BSR _BEEP
+L80:	; if_then_bb98.split33
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",155
+		MOV.L #_mypos, R1
+		MOV.W #0000H, 02H[R1]
+		MOV.W #0000H, [R1]
+L81:	; if_then_bb98.split34
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",156
+		MOV.L #_mypos, R1
+		MOV.L #00000000H, 04H[R1]
+L82:	; if_then_bb98.split35
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",157
+		MOV.L #_log_flag, R14
+		MOV.L #00000001H, [R14]
+L83:	; if_then_bb98.split36
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",158
+		MOV.L #_log_timer, R14
+		MOV.L #00000000H, [R14]
+L84:	; if_then_bb98.split37
+		MOV.L #00000003H, R1
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",159
+		MOV.L R1, R2
+		BSR _fast_run
+L85:	; if_then_bb98.split38
+		MOV.L #00000000H, R4
+		MOV.L #40490FDBH, R3
+		MOV.L #40C90FDBH, R2
+		MOV.L #000000B4H, R1
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",160
+		BSR _turn
+L86:	; if_then_bb98.split39
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",161
+		MOV.L #_mypos, R1
+		MOV.L 04H[R1], R2
+		ADD #06H, R2
+		MOV.L R2, R14
+		DIV #04H, R14
+		SHLL #02H, R14
+		SUB R14, R2
+		MOV.L R2, 04H[R1]
+L87:	; if_then_bb98.split40
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",162
+		BSR _map_write
+L88:	; if_then_bb98.split41
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",163
+		BSR _BEEP
+L89:	; if_then_bb98.split42
+		MOV.L #00000064H, R1
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",164
+		BSR _wait_ms
+L90:	; if_then_bb98.split43
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",165
+		BSR _BEEP
+L91:	; if_then_bb98.split44
+		MOV.L #00000064H, R1
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",166
+		BSR _wait_ms
+L92:	; if_then_bb98.split45
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",167
+		BSR _BEEP
+L93:	; if_then_bb98.split46
+		MOV.L #00000000H, R1
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",168
+		MOV.L R1, R2
+		BSR _search_adachi
+L94:	; if_then_bb98.split47
+		MOV.L #00000000H, R4
+		MOV.L #40490FDBH, R3
+		MOV.L #40C90FDBH, R2
+		MOV.L #000000B4H, R1
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",169
+		BSR _turn
+L95:	; if_then_bb98.split48
+		MOV.L #0008C02CH, R14
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",170
+		BCLR #06H, [R14].B
+L96:	; if_then_bb98.split49
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",171
+		BSR _map_write
+L97:	; if_then_bb98.split50
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",172
+		MOV.L #_log_flag, R14
+		MOV.L #00000000H, [R14]
+L98:	; if_then_bb98.split51
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",173
+		BSR _BEEP
+		BRA L152
+L99:	; switch_clause_bb104
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",188
+		MOV.L #_sen_fr, R14
+		MOV.W [R14], R14
+		MOV.L #_sen_fl, R15
+		ADD [R15].W, R14
+		MOV.L #_sen_r, R15
+		ADD [R15].W, R14
+		MOV.L #_sen_l, R15
+		ADD [R15].W, R14
+		CMP #1F41H, R14
+		BLT L152
+L100:	; if_then_bb119
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",189
+		BSR _BEEP
+L101:	; if_then_bb119.split
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",190
+		MOV.L #_degree, R14
+		MOV.L #00000000H, [R14]
+L102:	; if_then_bb119.split52
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",191
+		MOV.L #_timer, R14
+		MOV.L #00000000H, [R14]
+L103:	; if_then_bb119.split53
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",192
+		MOV.L #_log_timer, R14
+		MOV.L #00000000H, [R14]
+L104:	; if_then_bb119.split54
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",193
+		BSR _gyro_get_ref
+L105:	; if_then_bb119.split55
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",194
+		BSR _BEEP
+L106:	; if_then_bb119.split56
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",195
+		MOV.L #_mypos, R1
+		MOV.W #0000H, 02H[R1]
+		MOV.W #0000H, [R1]
+L107:	; if_then_bb119.split57
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",196
+		MOV.L #_mypos, R1
+		MOV.L #00000000H, 04H[R1]
+L108:	; if_then_bb119.split58
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",197
+		MOV.L #_log_flag, R14
+		MOV.L #00000001H, [R14]
+L109:	; if_then_bb119.split59
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",198
+		MOV.L #_log_timer, R14
+		MOV.L #00000000H, [R14]
+L110:	; if_then_bb119.split60
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",199
+		BSR _front_adjust
+L111:	; if_then_bb119.split61
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",200
+		BSR _BEEP
+L112:	; if_then_bb119.split62
+		MOV.L #000001F4H, R1
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",201
+		BSR _wait_ms
+		BRA L152
+L113:	; switch_clause_bb122
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",216
+		MOV.L #_sen_fr, R14
+		MOV.W [R14], R14
+		MOV.L #_sen_fl, R15
+		ADD [R15].W, R14
+		MOV.L #_sen_r, R15
+		ADD [R15].W, R14
+		MOV.L #_sen_l, R15
+		ADD [R15].W, R14
+		CMP #1F41H, R14
+		BLT L152
+L114:	; if_then_bb137
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",217
+		BSR _BEEP
+L115:	; if_then_bb137.split
+		MOV.L #000001F4H, R1
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",219
+		BSR _wait_ms
+		BRA L152
+L116:	; switch_clause_bb139
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",234
+		MOV.L #_sen_fr, R14
+		MOV.W [R14], R14
+		MOV.L #_sen_fl, R15
+		ADD [R15].W, R14
+		MOV.L #_sen_r, R15
+		ADD [R15].W, R14
+		MOV.L #_sen_l, R15
+		ADD [R15].W, R14
+		CMP #1F41H, R14
+		BLT L152
+L117:	; if_then_bb154
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",235
+		BSR _BEEP
+L118:	; if_then_bb154.split
+		MOV.L #000001F4H, R1
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",237
+		BSR _wait_ms
+		BRA L152
+L119:	; switch_clause_bb156
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",252
+		MOV.L #_sen_fr, R14
+		MOV.W [R14], R14
+		MOV.L #_sen_fl, R15
+		ADD [R15].W, R14
+		MOV.L #_sen_r, R15
+		ADD [R15].W, R14
+		MOV.L #_sen_l, R15
+		ADD [R15].W, R14
+		CMP #1F41H, R14
+		BLT L152
+L120:	; if_then_bb171
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",253
+		BSR _BEEP
+L121:	; if_then_bb171.split
+		MOV.L #000001F4H, R1
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",255
+		BSR _wait_ms
+		BRA L152
+L122:	; switch_clause_bb173
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",270
+		MOV.L #_sen_fr, R14
+		MOV.W [R14], R14
+		MOV.L #_sen_fl, R15
+		ADD [R15].W, R14
+		MOV.L #_sen_r, R15
+		ADD [R15].W, R14
+		MOV.L #_sen_l, R15
+		ADD [R15].W, R14
+		CMP #1F41H, R14
+		BLT L152
+L123:	; if_then_bb188
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",271
+		BSR _BEEP
+L124:	; if_then_bb188.split
+		MOV.L #000001F4H, R1
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",273
+		BSR _wait_ms
+		BRA L152
+L125:	; switch_clause_bb190
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",288
+		MOV.L #_sen_fr, R14
+		MOV.W [R14], R14
+		MOV.L #_sen_fl, R15
+		ADD [R15].W, R14
+		MOV.L #_sen_r, R15
+		ADD [R15].W, R14
+		MOV.L #_sen_l, R15
+		ADD [R15].W, R14
+		CMP #1F41H, R14
+		BLT L152
+L126:	; if_then_bb205
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",289
+		BSR _BEEP
+L127:	; if_then_bb205.split
+		MOV.L #000001F4H, R1
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",291
+		BSR _wait_ms
+		BRA L152
+L128:	; switch_clause_bb207
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",306
+		MOV.L #_sen_fr, R14
+		MOV.W [R14], R14
+		MOV.L #_sen_fl, R15
+		ADD [R15].W, R14
+		MOV.L #_sen_r, R15
+		ADD [R15].W, R14
+		MOV.L #_sen_l, R15
+		ADD [R15].W, R14
+		CMP #1F41H, R14
+		BLT L152
+L129:	; if_then_bb222
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",307
+		BSR _BEEP
+L130:	; if_then_bb222.split
+		MOV.L #000001F4H, R1
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",309
+		BSR _wait_ms
+		BRA L152
+L131:	; switch_clause_bb224
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",324
+		MOV.L #_sen_fr, R14
+		MOV.W [R14], R14
+		MOV.L #_sen_fl, R15
+		ADD [R15].W, R14
+		MOV.L #_sen_r, R15
+		ADD [R15].W, R14
+		MOV.L #_sen_l, R15
+		ADD [R15].W, R14
+		CMP #1F41H, R14
+		BLT L152
+L132:	; if_then_bb239
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",325
+		BSR _BEEP
+L133:	; if_then_bb239.split
+		MOV.L #000001F4H, R1
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",327
+		BSR _wait_ms
+		BRA L152
+L134:	; switch_clause_bb241
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",342
+		MOV.L #_sen_fr, R14
+		MOV.W [R14], R14
+		MOV.L #_sen_fl, R15
+		ADD [R15].W, R14
+		MOV.L #_sen_r, R15
+		ADD [R15].W, R14
+		MOV.L #_sen_l, R15
+		ADD [R15].W, R14
+		CMP #1F41H, R14
+		BLT L152
+L135:	; if_then_bb256
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",343
+		BSR _BEEP
+L136:	; if_then_bb256.split
+		MOV.L #000001F4H, R1
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",345
+		BSR _wait_ms
+		BRA L152
+L137:	; switch_clause_bb258
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",360
+		MOV.L #_sen_fr, R14
+		MOV.W [R14], R14
+		MOV.L #_sen_fl, R15
+		ADD [R15].W, R14
+		MOV.L #_sen_r, R15
+		ADD [R15].W, R14
+		MOV.L #_sen_l, R15
+		ADD [R15].W, R14
+		CMP #1F41H, R14
+		BLT L152
+L138:	; if_then_bb273
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",361
+		BSR _BEEP
+L139:	; if_then_bb273.split
+		MOV.L #000001F4H, R1
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",363
+		BSR _wait_ms
+		BRA L152
+L140:	; switch_clause_bb275
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",379
+		MOV.L #_sen_fr, R14
+		MOV.W [R14], R14
+		MOV.L #_sen_fl, R15
+		ADD [R15].W, R14
+		MOV.L #_sen_r, R15
+		ADD [R15].W, R14
+		MOV.L #_sen_l, R15
+		ADD [R15].W, R14
+		CMP #1F41H, R14
+		BLT L152
+L141:	; if_then_bb290
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",380
+		BSR _BEEP
+L142:	; if_then_bb290.split
+		MOV.L #000001F4H, R1
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",382
+		BSR _wait_ms
+		BRA L152
+L143:	; switch_clause_bb292
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",397
+		MOV.L #_sen_fr, R14
+		MOV.W [R14], R14
+		MOV.L #_sen_fl, R15
+		ADD [R15].W, R14
+		MOV.L #_sen_r, R15
+		ADD [R15].W, R14
+		MOV.L #_sen_l, R15
+		ADD [R15].W, R14
+		CMP #1F41H, R14
+		BLT L152
+L144:	; if_then_bb307
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",398
+		BSR _BEEP
+L145:	; if_then_bb307.split
+		MOV.L #000001F4H, R1
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",400
+		BSR _wait_ms
+		BRA L152
+L146:	; switch_clause_bb309
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",415
+		MOV.L #_sen_fr, R14
+		MOV.W [R14], R14
+		MOV.L #_sen_fl, R15
+		ADD [R15].W, R14
+		MOV.L #_sen_r, R15
+		ADD [R15].W, R14
+		MOV.L #_sen_l, R15
+		ADD [R15].W, R14
+		CMP #1F41H, R14
+		BLT L152
+L147:	; if_then_bb324
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",416
+		BSR _BEEP
+L148:	; bb326
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",417
+		MOV.L #_sen_fr, R14
+		MOV.W [R14], R14
+		MOV.L #_sen_fl, R15
+		ADD [R15].W, R14
+		MOV.L #_sen_r, R15
+		ADD [R15].W, R14
+		MOV.L #_sen_l, R15
+		ADD [R15].W, R14
+		CMP #1F40H, R14
+		BGT L148
+L149:	; bb341
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",418
+		BSR _adjust
+L150:	; bb341.split
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",420
+		BSR _BEEP
+L151:	; bb341.split63
+		MOV.L #000001F4H, R1
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",421
+		BSR _wait_ms
+L152:	; switch_break_bb
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",433
+		MOV.L #_speed, R14
+		MOV.L #3DCCCCCDH, R15
+		FCMP [R14].L, R15
+		BPZ L160
+L153:	; if_then_bb348
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",434
+		MOV.W 06H[R0], R1
+		CMP #0FH, R1
+		BNE L155
+L154:	; if_then_bb354
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",435
+		MOV.W #0001H, 06H[R0]
+		BRA L156
+L155:	; if_else_bb355
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",437
+		MOV.W 06H[R0], R1
+		ADD #01H, R1
+		MOV.W R1, 06H[R0]
+L156:	; if_break_bb358
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",439
+		MOV.L #00000000H, 08H[R0]
+		BRA L158
+L157:	; bb359
+		MOV.L 08H[R0], R1
+		ADD #01H, R1
+		MOV.L R1, 08H[R0]
+L158:	; bb362
+		MOV.L 08H[R0], R1
+		CMP #000F4240H, R1
+		BLTU L157
+L159:	; bb367
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",440
+		BSR _BEEP
+L160:	; if_break_bb368
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",443
+		MOV.L #_speed, R14
+		MOV.L [R14], R14
+		FCMP #0BDCCCCCDH, R14
+		BPZ L168
+L161:	; if_then_bb373
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",444
+		MOV.W 06H[R0], R1
+		CMP #01H, R1
+		BNE L163
+L162:	; if_then_bb379
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",445
+		MOV.W #000FH, 06H[R0]
+		BRA L164
+L163:	; if_else_bb380
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",447
+		MOV.W 06H[R0], R1
+		SUB #01H, R1
+		MOV.W R1, 06H[R0]
+L164:	; if_break_bb383
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",449
+		MOV.L #00000000H, 08H[R0]
+		BRA L166
+L165:	; bb384
+		MOV.L 08H[R0], R1
+		ADD #01H, R1
+		MOV.L R1, 08H[R0]
+L166:	; bb387
+		MOV.L 08H[R0], R1
+		CMP #000F4240H, R1
+		BLTU L165
+L167:	; bb392
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",450
+		BSR _BEEP
+L168:	; if_break_bb393
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",452
+		MOV.W 06H[R0], R1
+		BSR _LED
+L169:	; if_break_bb393.split
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",455
+		BSR _IOex_SWITCH
+		MOV.L #_push_switch, R14
+		MOV.B R1, [R14]
+L170:	; if_break_bb393.split64
+		MOV.L #0008C02CH, R14
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",456
+		BCLR #06H, [R14].B
+L171:	; bb396.split
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",61
+		MOV.L #_I_tar_ang_vel, R14
+		MOV.L #00000000H, [R14]
+L172:	; bb396.split65
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",62
+		MOV.L #_I_ang_vel, R14
+		MOV.L #00000000H, [R14]
+L173:	; bb396.split66
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",63
+		MOV.L #_I_tar_speed, R14
+		MOV.L #00000000H, [R14]
+L174:	; bb396.split67
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",64
+		MOV.L #_I_speed, R14
+		MOV.L #00000000H, [R14]
+L175:	; bb396.split68
+		.LINE  "C:\Users\junmo\OneDrive - kcg.ac.jp\BACKUP\mause\jane\step7_maze\HM_StarterKit.c",66
+		MOV.W 06H[R0], R1
+		SUB #01H, R1
+		CMP #0EH, R1
+		BGTU L152
+L176:	; bb396.split68
+		MOV.L #L177, R14
+		.swmov L177, R1, R14, R14
+L178:
+		BRA.L R14
+		.swsection	W,stuff
+L177:
+		.switch		L17-L178
+		.switch		L73-L178
+		.switch		L99-L178
+		.switch		L113-L178
+		.switch		L116-L178
+		.switch		L119-L178
+		.switch		L122-L178
+		.switch		L125-L178
+		.switch		L128-L178
+		.switch		L131-L178
+		.switch		L134-L178
+		.switch		L137-L178
+		.switch		L140-L178
+		.switch		L143-L178
+		.switch		L146-L178
+		.SECTION	W,ROMDATA,ALIGN=4
+		.SECTION	W_1,ROMDATA
+		.SECTION	W_2,ROMDATA,ALIGN=2
+		.END

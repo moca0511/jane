@@ -1,0 +1,56 @@
+;RX Family C/C++ Compiler (V3.01.00 [28 Nov 2018])  04-Dec-2021 00:04:36
+
+;*** CPU TYPE ***
+
+;-ISA=RXV1
+
+;*** COMMAND PARAMETER ***
+
+;-output=src=vecttbl.src
+;-isa=rxv1
+;-fpu
+;-lang=c99
+;-include=.
+;-obj_path=DefaultBuild
+;-asm_path=DefaultBuild
+;-debug
+;-optimize=0
+;-nologo
+;-exec_time=C:\Users\junmo\AppData\Local\Temp\CSPlusBuildTool_4cea4f0b6b6148fab28ee750068576565pl0eccs.tyc
+;vecttbl.c
+
+		.glb	_Fixed_Vectors
+		.glb	_id_code
+		.glb	_MDEreg
+		.glb	_Excep_SuperVisorInst
+		.glb	_Excep_AccessInst
+		.glb	_Dummy
+		.glb	_Excep_UndefinedInst
+		.glb	_Excep_FloatingPoint
+		.glb	_NonMaskableInterrupt
+		.glb	_PowerON_Reset_PC
+		.SECTION	FIXEDVECT,ROMDATA,ALIGN=4
+_Fixed_Vectors:
+		.lword	_Excep_SuperVisorInst
+		.lword	_Excep_AccessInst
+		.lword	_Dummy
+		.lword	_Excep_UndefinedInst
+		.lword	_Dummy
+		.lword	_Excep_FloatingPoint
+		.lword	_Dummy
+		.lword	_Dummy
+		.lword	_Dummy
+		.lword	_Dummy
+		.lword	_NonMaskableInterrupt
+		.lword	_PowerON_Reset_PC
+		.SECTION	$ADDR_C_FFFFFF80,ROMDATA
+
+		.ORG		0FFFFFF80H
+_MDEreg:
+		.lword	0FFFFFFFFH
+		.SECTION	$ADDR_C_FFFFFFA0,ROMDATA
+
+		.ORG		0FFFFFFA0H
+_id_code:
+		.lword	0FFFFFFFFH,0FFFFFFFFH,0FFFFFFFFH,0FFFFFFFFH
+		.END
